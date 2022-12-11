@@ -1,10 +1,9 @@
-
 const WORLD_HALF_SIZE = 100;
 const FLOOR_POSITION = -20;
 const screenSize = 130;
 const lightDensity = 40;
 // const FLOOR_HEIGHT = -10;
-const C_GRAVITY = 0.3;
+const C_GRAVITY = 0.2;
 
 let ui = {
   // add yours
@@ -16,12 +15,12 @@ let collisionArr = [];
 
 let frog;
 let frog_list = [];
+let frog_audiences;
 
 let user;
 let bar_small;
 
 let spec;
-
 
 const FFT_MAIN_SOUND = {
   triggered: false,
@@ -54,24 +53,32 @@ function setupTHREE() {
 
   // load the model
   loadFrog("assets/frog.obj");
-  for (let i = 0; i < 10; i++) {
-    loadSTL("assets/frog.stl", -50 + i * 10, FLOOR_POSITION + 3, 0);
-    loadSTL("assets/frog.stl", -50 + i * 10, FLOOR_POSITION + 3, 10);
-    loadSTL("assets/frog.stl", -50 + i * 10, FLOOR_POSITION + 3, -10);
+  // for (let i = 0; i < 10; i++) {
+  //   loadSTL("assets/frog.stl", -50 + i * 10, FLOOR_POSITION + 3, 0);
+  //   loadSTL("assets/frog.stl", -50 + i * 10, FLOOR_POSITION + 3, 10);
+  //   loadSTL("assets/frog.stl", -50 + i * 10, FLOOR_POSITION + 3, -10);
+  // }
+  for (let i = 0; i < 100; i++) {
+    load_frogs();
   }
-  loadGLTF("assets/bar_counter/scene.gltf", -WORLD_HALF_SIZE, FLOOR_POSITION, -WORLD_HALF_SIZE);
+  loadGLTF(
+    "assets/bar_counter/scene.gltf",
+    -WORLD_HALF_SIZE,
+    FLOOR_POSITION,
+    -WORLD_HALF_SIZE
+  );
   // loadBar("assets/bar.obj");
   // console.log(bar_small)
 
   // ground
-  let plane = getPlane('ground');
+  let plane = getPlane("ground");
   plane.position.y = FLOOR_POSITION;
-  plane.rotation.x = - PI / 2;
+  plane.rotation.x = -PI / 2;
   // plane.layers.enable(1);
   collisionArr.push(plane);
   // screen
-  let screen = getPlane('screen');
-  screen.position.y = FLOOR_POSITION + 9 * screenSize / 32;
+  let screen = getPlane("screen");
+  screen.position.y = FLOOR_POSITION + (9 * screenSize) / 32;
   screen.position.z = -WORLD_HALF_SIZE;
   collisionArr.push(screen);
 
@@ -81,18 +88,15 @@ function setupTHREE() {
   // 3rd person camera
   thirdPovCam = new ThirdPersonCamera(camera, params);
 
-  // let laserbeam = new LaserBeam({ reflectMax: 5 });
-  // laserbeam.object3d.position.set(-4.5, -10, -4.5);
-  // laserbeamLeft.push(laserbeam);
-  // add2Scene(laserbeam);
+  frog_audiences = new frogAudiences();
+  frog_audiences.init();
 
-  // getGlowBox(0, WORLD_HALF_SIZE/4);
   spec = new Specturm();
   spec.intialize();
   // laserbeam left positions
-  appendLaserToScene(generate_laserBeam_locations('left'), 'left');
+  appendLaserToScene(generate_laserBeam_locations("left"), "left");
   // laserbeam right positions
-  appendLaserToScene(generate_laserBeam_locations('right'), 'right');
+  appendLaserToScene(generate_laserBeam_locations("right"), "right");
 }
 
 function updateTHREE() {
@@ -101,26 +105,24 @@ function updateTHREE() {
   updateAudioInput();
   if (FFT_MAIN_SOUND.avg > 0.2) {
     onLaser();
-    updateLaser('left', soundDiff, FFT_MAIN_SOUND.avg);
-    updateLaser('right', soundDiff, FFT_MAIN_SOUND.avg);
+    updateLaser("left", soundDiff, FFT_MAIN_SOUND.avg);
+    updateLaser("right", soundDiff, FFT_MAIN_SOUND.avg);
   } else {
     offLaser();
   }
   user.update();
   thirdPovCam.update(user);
   spec.update();
-  
+  frog_audiences.update();
+
   // updateCameraFace(mouseX, thirdPovCam);
 
-  for (let i = 0; i < frog_list.length; i++) {
-    small_jump(frog_list[i], 3);
-  }
+  // for (let i = 0; i < frog_list.length; i++) {
+  //   small_jump(frog_list[i], 3);
+  // }
   if (bar_small != undefined) {
     // bar_small.layers.set(1);
   }
-
-
-
 
   //
 }
@@ -216,7 +218,7 @@ function setupGUI() {
     .add(FFT_SUB_SOUND, "threshold", 0.0, 1.0)
     .step(0.01)
     .listen()
-    .onChange(() => { });
+    .onChange(() => {});
   folderSubSoundConfig
     .add(FFT_SUB_SOUND, "min", 0, 1023)
     .step(1)
