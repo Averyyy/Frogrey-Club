@@ -20,6 +20,8 @@ let frog_list = [];
 let user;
 let bar_small;
 
+let spec;
+
 
 const FFT_MAIN_SOUND = {
   triggered: false,
@@ -59,7 +61,7 @@ function setupTHREE() {
   }
   loadGLTF("assets/bar_counter/scene.gltf", -WORLD_HALF_SIZE, FLOOR_POSITION, -WORLD_HALF_SIZE);
   // loadBar("assets/bar.obj");
-  console.log(bar_small)
+  // console.log(bar_small)
 
   // ground
   let plane = getPlane('ground');
@@ -84,7 +86,9 @@ function setupTHREE() {
   // laserbeamLeft.push(laserbeam);
   // add2Scene(laserbeam);
 
-
+  // getGlowBox(0, WORLD_HALF_SIZE/4);
+  spec = new Specturm();
+  spec.intialize();
   // laserbeam left positions
   appendLaserToScene(generate_laserBeam_locations('left'), 'left');
   // laserbeam right positions
@@ -104,7 +108,9 @@ function updateTHREE() {
   }
   user.update();
   thirdPovCam.update(user);
-  updateCameraFace(mouseX, thirdPovCam);
+  spec.update();
+  
+  // updateCameraFace(mouseX, thirdPovCam);
 
   for (let i = 0; i < frog_list.length; i++) {
     small_jump(frog_list[i], 3);

@@ -16,11 +16,11 @@ function initTHREE() {
   }
   // scene
   scene = new THREE.Scene();
-  let bgTexture = new THREE.TextureLoader().load("public/bg.jpg");
-  bgTexture.minFilter = THREE.LinearFilter;
-  // repeat texture
-  bgTexture.wrapS = THREE.RepeatWrapping;
-  scene.background = bgTexture;
+  // let bgTexture = new THREE.TextureLoader().load("public/bg.jpg");
+  // bgTexture.minFilter = THREE.LinearFilter;
+  // // repeat texture
+  // bgTexture.wrapS = THREE.RepeatWrapping;
+  // scene.background = bgTexture;
 
 
 
@@ -32,6 +32,7 @@ function initTHREE() {
     1000
   );
   camera.position.set(0, 20, 20);
+  camera.layers.enable(1);
 
   // set the rotation of the camera to horizonal ... not working for some reason
   camera.rotation.x = -Math.PI / 2;
@@ -39,8 +40,8 @@ function initTHREE() {
 
 
   // renderer
-  renderer = new THREE.WebGLRenderer();
-  renderer.setClearColor(0x111111);
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setClearColor("#333333");
   renderer.setPixelRatio(window.devicePixelRatio * renderRatio);   //set pixel ratio to 1/2
   renderer.setSize(window.innerWidth, window.innerHeight);
 
@@ -54,7 +55,28 @@ function initTHREE() {
   controls = new THREE.FlyControls(camera, renderer.domElement);
   // scene.add(controls.getObject());
 
+  // COMPOSER
+  renderScene = new THREE.RenderPass(scene, camera)
 
+  effectFXAA = new THREE.ShaderPass(THREE.FXAAShader)
+  effectFXAA.uniforms.resolution.value.set(1 / window.innerWidth, 1 / window.innerHeight)
+
+  bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85)
+  bloomPass.threshold = 0.3
+  bloomPass.strength = 1.5
+  bloomPass.radius = 0.5
+  bloomPass.renderToScreen = true
+
+  composer = new THREE.EffectComposer(renderer)
+  composer.setSize(window.innerWidth, window.innerHeight)
+
+  composer.addPass(renderScene)
+  composer.addPass(effectFXAA)
+  composer.addPass(bloomPass)
+
+  renderer.gammaInput = true
+  renderer.gammaOutput = true
+  renderer.toneMappingExposure = Math.pow(1.2, 4.0)
 
 
   // stats
@@ -82,7 +104,18 @@ function animate() {
 
 
   updateTHREE();
+
+  renderer.autoClear = false;
+  renderer.clear();
+
+  camera.layers.set(1);
+  composer.render();
+
+  renderer.clearDepth();
+  camera.layers.set(0);
   renderer.render(scene, camera);
+
+
 }
 
 // event listeners

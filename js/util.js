@@ -469,7 +469,7 @@ class ThirdPersonCamera {
         this.camera = camera;
         this.position = new THREE.Vector3();
         this.lookAtVector = new THREE.Vector3();
-        this.idealOffset = new THREE.Vector3(-10, 10, 70);
+        this.idealOffset = new THREE.Vector3(0, 10, 40);
         this.idealLookAt = new THREE.Vector3(0, 0, -100);
     }
     calculateOffset(target) {
@@ -538,8 +538,8 @@ class Character {
         this.mesh.position.z = this.position.z;
 
         this.mesh.setRotationFromQuaternion(this.direction);
-        this.mesh.rotation.x = PI/2
-        this.mesh.rotation.y = PI;
+        // this.mesh.rotation.x = PI/2
+        // this.mesh.rotation.y = PI;
     }
     jump() {
         // if (this.keys.space) {

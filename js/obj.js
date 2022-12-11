@@ -136,13 +136,13 @@ function loadGLTF(filepath, x, y, z) {
             const material = new THREE.MeshPhysicalMaterial({
                 side: THREE.DoubleSide,
                 // map: texture
-                // color: 0xe47200
+                color: 0xe47200,
                 metalness: 0, // won't work with transmission
                 roughness: 0.1,
                 transmission: 0.7, // Add transparency (a little more than that)
                 thickness: 0.5, // Add refraction!
                 color: 0xFFFFFF,
-                // wireframe: true
+                wireframe: true
             });
             let model = gltf.scene;
             model.traverse((o) => {
@@ -156,9 +156,10 @@ function loadGLTF(filepath, x, y, z) {
             mesh.scale.set(0.2, 0.2, 0.2);
             // mesh.position.set(x, y, z);
             mesh.position.set(x + 20, y, z + 20);
-            mesh.castShadow = true;
-            mesh.receiveShadow = true;
+            mesh.layers.enable(1);
+            
             bar_small = mesh;
+
             // bar_small.layers.toggle(1);
             scene.add(bar_small);
         },

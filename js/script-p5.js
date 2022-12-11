@@ -1,6 +1,7 @@
 /* sound variables */
 let P5_VISIBILITY = true;
 let mic, fft;
+let spectrum ;
 
 // pos variables
 let pos_array = []
@@ -35,7 +36,7 @@ function draw() {
 
 
   //update and display FFT spectrum
-  let spectrum = fft.analyze();
+  spectrum = fft.analyze();
   let sumS = 0;
   let countS = 0;
   let sumB = 0;
