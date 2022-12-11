@@ -50,7 +50,7 @@ function setupTHREE() {
   setupGUI();
 
   // load the model
-  // loadFrog("assets/frog.obj");
+  loadFrog("assets/frog.obj");
   for (let i = 0; i < 10; i++) {
     loadSTL("assets/frog.stl", -50 + i * 10, FLOOR_POSITION + 3, 0);
     loadSTL("assets/frog.stl", -50 + i * 10, FLOOR_POSITION + 3, 10);
@@ -64,7 +64,7 @@ function setupTHREE() {
   let plane = getPlane('ground');
   plane.position.y = FLOOR_POSITION;
   plane.rotation.x = - PI / 2;
-  plane.layers.enable(1);
+  // plane.layers.enable(1);
   collisionArr.push(plane);
   // screen
   let screen = getPlane('screen');
@@ -109,7 +109,7 @@ function updateTHREE() {
     small_jump(frog_list[i], 3);
   }
   if (bar_small != undefined) {
-    bar_small.layers.set(1);
+    // bar_small.layers.set(1);
   }
 
 

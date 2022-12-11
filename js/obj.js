@@ -14,8 +14,7 @@ function loadFrog(filepath) {
             for (let child of frog.children) {
                 //child.material = new THREE.MeshBasicMaterial();
                 child.material = new THREE.MeshPhysicalMaterial({
-                    color: 0x00FF00,
-
+                    color: 0x39e75f,
                     // wireframe: true
                 });
             }
@@ -158,7 +157,7 @@ function loadGLTF(filepath, x, y, z) {
             mesh.castShadow = true;
             mesh.receiveShadow = true;
             bar_small = mesh;
-            bar_small.layers.toggle(1);
+            // bar_small.layers.toggle(1);
             scene.add(bar_small);
         },
 

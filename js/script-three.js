@@ -22,8 +22,7 @@ function initTHREE() {
   bgTexture.wrapS = THREE.RepeatWrapping;
   scene.background = bgTexture;
 
-  const bloomLayer = new THREE.Layers();
-  bloomLayer.set(1);
+
 
   // camera (fov, ratio, near, far)
   camera = new THREE.PerspectiveCamera(
@@ -33,8 +32,7 @@ function initTHREE() {
     1000
   );
   camera.position.set(0, 20, 20);
-  // camera.position.z = 20;
-  // camera.position.y = 50;
+
   // set the rotation of the camera to horizonal ... not working for some reason
   camera.rotation.x = -Math.PI / 2;
 
@@ -56,25 +54,7 @@ function initTHREE() {
   controls = new THREE.FlyControls(camera, renderer.domElement);
   // scene.add(controls.getObject());
 
-  // bloom
-  renderScene = new THREE.RenderPass(scene, camera);
-  // effectFXAA = new THREE.ShaderPass(THREE.FXAAShader);
-  // effectFXAA.uniforms.resolution.value.set(1 / window.innerWidth, 1 / window.innerHeight);
-  bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
-  bloomPass.threshold = 0.2;
-  bloomPass.strength = 1.5;
-  bloomPass.radius = 0.5;
-  // bloomPass.renderToScreen = true;
 
-  composer = new THREE.EffectComposer(renderer);
-  composer.setSize(window.innerWidth, window.innerHeight);
-  composer.addPass(renderScene);
-  // composer.addPass(effectFXAA);
-  composer.addPass(bloomPass);
-
-  renderer.gammaInput = true;
-  renderer.gammaOutput = true;
-  renderer.toneMappingExposure = Math.pow(0.8, 4.0);
 
 
   // stats
@@ -95,7 +75,6 @@ function initTHREE() {
 }
 
 function animate() {
-  camera.layers.set(1);
   requestAnimationFrame(animate);
   stats.update();
   time = performance.now();
@@ -103,11 +82,6 @@ function animate() {
 
 
   updateTHREE();
-  camera.layers.set(1);
-  composer.render();
-
-  renderer.clearDepth();
-  camera.layers.set(0);
   renderer.render(scene, camera);
 }
 
