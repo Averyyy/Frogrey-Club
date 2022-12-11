@@ -500,8 +500,8 @@ class ThirdPersonCamera {
 class Character {
     constructor() {
         this.position = new THREE.Vector3();
-        this.position.y = FLOOR_HEIGHT;
-        this.direction = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI * 0);
+        this.position.y = FLOOR_POSITION;
+        this.direction = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0),  Math.PI * 0);
         this.moveVel = 0.5;
         this.rotateVel = 0.02;
         this.jumpVel = 0.0;
@@ -513,7 +513,7 @@ class Character {
         //
         this.mesh = getBox();
         this.mesh.scale.set(10, 20, 2);
-        scene.add(this.mesh);
+        // scene.add(this.mesh);
         //
         this.keys = {
             forward: false,
@@ -536,8 +536,10 @@ class Character {
         this.mesh.position.x = this.position.x;
         this.mesh.position.y = this.position.y;
         this.mesh.position.z = this.position.z;
-        //
+
         this.mesh.setRotationFromQuaternion(this.direction);
+        this.mesh.rotation.x = PI/2
+        this.mesh.rotation.y = PI;
     }
     jump() {
         // if (this.keys.space) {
@@ -550,10 +552,10 @@ class Character {
         }
         // fall
         this.position.y += this.jumpVel;
-        if (this.position.y > FLOOR_HEIGHT) {
+        if (this.position.y > FLOOR_POSITION) {
             this.jumpVel -= C_GRAVITY;
         } else {
-            this.position.y = FLOOR_HEIGHT;
+            this.position.y = FLOOR_POSITION;
             this.isJumped = false;
             this.jumpVel = 0.0;
         }

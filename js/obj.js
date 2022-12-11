@@ -19,12 +19,14 @@ function loadFrog(filepath) {
                 });
             }
             console.log(frog);
-            frog.scale.x = 0.2;
-            frog.scale.y = 0.2;
-            frog.scale.z = 0.2;
-            frog.rotation.x = -PI / 2;
-            frog.position.y = FLOOR_POSITION;
+            frog.scale.x = 0.1;
+            frog.scale.y = 0.1;
+            frog.scale.z = 0.1;
+            // frog.rotation.y = -PI / 2;
+            // frog.position.y = FLOOR_POSITION;
+            user.mesh = frog;
             scene.add(frog);
+
         },
 
         // onProgress callback

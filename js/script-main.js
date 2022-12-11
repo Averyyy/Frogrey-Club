@@ -3,7 +3,7 @@ const WORLD_HALF_SIZE = 100;
 const FLOOR_POSITION = -20;
 const screenSize = 130;
 const lightDensity = 40;
-const FLOOR_HEIGHT = -10;
+// const FLOOR_HEIGHT = -10;
 const C_GRAVITY = 0.3;
 
 let ui = {
@@ -17,6 +17,7 @@ let collisionArr = [];
 let frog;
 let frog_list = [];
 
+let user;
 let bar_small;
 
 
