@@ -21,6 +21,7 @@
   <!-- <script src="https://threejs.org/build/three.min.js"></script> -->
 
   <script src="https://unpkg.com/three@0.146.0/examples/js/controls/OrbitControls.js"></script>
+  <!-- load video texture -->
   <script src="/libs/PointerLockControls.js"></script>
   <script src="/libs/FlyControls.js"></script>
   <script src="/libs/OBJLoader.js"></script>
@@ -50,11 +51,14 @@
   <script src="js/obj.js"></script>
   <script src="js/components/spec.js"></script>
   <script src="js/components/frogAudience.js"></script>
+  <script src="js/components/spotlight.js"></script>
 </head>
 
 <body>
   <div id="container-three"></div>
   <div id="container-p5"></div>
+  <video id="video" playsinline webkit-playsinline muted loop autoplay width="320" height="240" src="/assets/video.mov" style="display: none;"></video>
+
 </body>
 
 </html>

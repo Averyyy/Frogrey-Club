@@ -52,6 +52,19 @@ class Specturm {
         this.specList[i].scale.y = height * WORLD_HALF_SIZE;
       }
 
+      // hide objects if near screen
+      for (let i = 0; i < this.specList.length; i++) {
+        if (
+          this.specList[i].position.z === -WORLD_HALF_SIZE &&
+          this.specList[i].position.x > -WORLD_HALF_SIZE + 50 &&
+          this.specList[i].position.x < WORLD_HALF_SIZE - 50
+        ) {
+          this.specList[i].visible = false;
+        } else {
+          this.specList[i].visible = true;
+        }
+      }
+
       //   console.log(this.pastAmplitude);
     }
   }
@@ -64,6 +77,7 @@ function getGlowBox(x, z, mode) {
   let material = new THREE.MeshBasicMaterial({
     color: randColor,
     wireframe: false,
+    // blending: THREE.AdditiveBlending,
   });
   let mesh = new THREE.Mesh(geometry, material);
   const dimensions = mesh.geometry.parameters;

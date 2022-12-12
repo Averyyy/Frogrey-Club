@@ -8,12 +8,14 @@ let time = 0;
 let frame = 0;
 const renderRatio = 0.5;
 
-function initTHREE() {
+let lights = [];
+let targetBox;
 
+function initTHREE() {
   params = {
     near: 1,
     far: 300,
-  }
+  };
   // scene
   scene = new THREE.Scene();
   // let bgTexture = new THREE.TextureLoader().load("public/bg.jpg");
@@ -22,7 +24,15 @@ function initTHREE() {
   // bgTexture.wrapS = THREE.RepeatWrapping;
   // scene.background = bgTexture;
 
+  targetBox = getBox();
+  // targetBox.material.color.set(0xff00ff);
+  scene.add(targetBox);
+  targetBox.visible = false;
 
+  let tLight = new Light();
+  tLight.setPosition(0, 30, 0);
+  tLight.light.target = targetBox;
+  lights.push(tLight);
 
   // camera (fov, ratio, near, far)
   camera = new THREE.PerspectiveCamera(
@@ -37,12 +47,10 @@ function initTHREE() {
   // set the rotation of the camera to horizonal ... not working for some reason
   camera.rotation.x = -Math.PI / 2;
 
-
-
   // renderer
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setClearColor("#333333");
-  renderer.setPixelRatio(window.devicePixelRatio * renderRatio);   //set pixel ratio to 1/2
+  renderer.setPixelRatio(window.devicePixelRatio * renderRatio); //set pixel ratio to 1/2
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   // container
@@ -56,28 +64,35 @@ function initTHREE() {
   // scene.add(controls.getObject());
 
   // COMPOSER
-  renderScene = new THREE.RenderPass(scene, camera)
+  renderScene = new THREE.RenderPass(scene, camera);
 
-  effectFXAA = new THREE.ShaderPass(THREE.FXAAShader)
-  effectFXAA.uniforms.resolution.value.set(1 / window.innerWidth, 1 / window.innerHeight)
+  effectFXAA = new THREE.ShaderPass(THREE.FXAAShader);
+  effectFXAA.uniforms.resolution.value.set(
+    1 / window.innerWidth,
+    1 / window.innerHeight
+  );
 
-  bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85)
-  bloomPass.threshold = 0.3
-  bloomPass.strength = 1.5
-  bloomPass.radius = 0.5
-  bloomPass.renderToScreen = true
+  bloomPass = new THREE.UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    1.5,
+    0.4,
+    0.85
+  );
+  bloomPass.threshold = 0.2;
+  bloomPass.strength = 0.7;
+  bloomPass.radius = 0.55;
+  bloomPass.renderToScreen = true;
 
-  composer = new THREE.EffectComposer(renderer)
-  composer.setSize(window.innerWidth, window.innerHeight)
+  composer = new THREE.EffectComposer(renderer);
+  composer.setSize(window.innerWidth, window.innerHeight);
 
-  composer.addPass(renderScene)
-  composer.addPass(effectFXAA)
-  composer.addPass(bloomPass)
+  composer.addPass(renderScene);
+  composer.addPass(effectFXAA);
+  composer.addPass(bloomPass);
 
-  renderer.gammaInput = true
-  renderer.gammaOutput = true
-  renderer.toneMappingExposure = Math.pow(1.2, 4.0)
-
+  renderer.gammaInput = true;
+  renderer.gammaOutput = true;
+  renderer.toneMappingExposure = Math.pow(1.2, 4.0);
 
   // stats
   stats = new Stats();
@@ -102,8 +117,17 @@ function animate() {
   time = performance.now();
   frame++;
 
-
   updateTHREE();
+  // update the lights
+  for (let l of lights) {
+    //l.move();
+    l.update();
+  }
+  // update the target position
+  let frequency = frame * 0.01;
+  let radialDistance = 20;
+  targetBox.position.x = cos(frequency) * radialDistance;
+  targetBox.position.z = sin(frequency) * radialDistance;
 
   renderer.autoClear = false;
   renderer.clear();
@@ -114,8 +138,6 @@ function animate() {
   renderer.clearDepth();
   camera.layers.set(0);
   renderer.render(scene, camera);
-
-
 }
 
 // event listeners

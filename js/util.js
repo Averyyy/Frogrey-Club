@@ -32,6 +32,7 @@ function getPlane(mode) {
 
     //     posArray[i + 2] = noiseValue; // update the z value.
     // }
+    mesh.receiveShadow = true;
     scene.add(mesh);
     return mesh;
   } else if (mode == "screen") {
@@ -41,11 +42,21 @@ function getPlane(mode) {
       (9 * screenSize) / 16,
       32
     );
+    const video = document.getElementById("video");
+    const videoTexture = new THREE.Texture(video);
+    videoTexture.needsUpdate = true;
+    videoTexture.minFilter = THREE.LinearFilter;
+    videoTexture.magFilter = THREE.LinearFilter;
+    videoTexture.format = THREE.RGBFormat;
+    videoTexture.generateMipmaps = false;
+    const videoMaterial = new THREE.MeshBasicMaterial({
+      map: videoTexture,
+    });
     const material = new THREE.MeshPhongMaterial({
       side: THREE.DoubleSide,
     });
     const mesh = new THREE.Mesh(geometry, material);
-
+    // mesh.receiveShadow = true;
     scene.add(mesh);
     return mesh;
   }
