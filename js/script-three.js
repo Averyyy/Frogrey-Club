@@ -24,15 +24,15 @@ function initTHREE() {
   // bgTexture.wrapS = THREE.RepeatWrapping;
   // scene.background = bgTexture;
 
-  targetBox = getBox();
-  // targetBox.material.color.set(0xff00ff);
-  scene.add(targetBox);
-  targetBox.visible = false;
+  // targetBox = getBox();
+  // // targetBox.material.color.set(0xff00ff);
+  // scene.add(targetBox);
+  // targetBox.visible = false;
 
-  let tLight = new Light();
-  tLight.setPosition(0, 30, 0);
-  tLight.light.target = targetBox;
-  lights.push(tLight);
+  // let tLight = new Light();
+  // tLight.setPosition(0, 30, 0);
+  // tLight.light.target = targetBox;
+  // lights.push(tLight);
 
   // camera (fov, ratio, near, far)
   camera = new THREE.PerspectiveCamera(
@@ -79,8 +79,8 @@ function initTHREE() {
     0.85
   );
   bloomPass.threshold = 0.2;
-  bloomPass.strength = 0.7;
-  bloomPass.radius = 0.55;
+  bloomPass.strength = 1;
+  bloomPass.radius = 1.5;
   bloomPass.renderToScreen = true;
 
   composer = new THREE.EffectComposer(renderer);
@@ -92,7 +92,7 @@ function initTHREE() {
 
   renderer.gammaInput = true;
   renderer.gammaOutput = true;
-  renderer.toneMappingExposure = Math.pow(1.2, 4.0);
+  renderer.toneMappingExposure = Math.pow(0.4, 3.0);
 
   // stats
   stats = new Stats();
@@ -118,16 +118,16 @@ function animate() {
   frame++;
 
   updateTHREE();
-  // update the lights
-  for (let l of lights) {
-    //l.move();
-    l.update();
-  }
-  // update the target position
-  let frequency = frame * 0.01;
-  let radialDistance = 20;
-  targetBox.position.x = cos(frequency) * radialDistance;
-  targetBox.position.z = sin(frequency) * radialDistance;
+  // // update the lights
+  // for (let l of lights) {
+  //   //l.move();
+  //   l.update();
+  // }
+  // // update the target position
+  // let frequency = frame * 0.01;
+  // let radialDistance = 20;
+  // targetBox.position.x = cos(frequency) * radialDistance;
+  // targetBox.position.z = sin(frequency) * radialDistance;
 
   renderer.autoClear = false;
   renderer.clear();

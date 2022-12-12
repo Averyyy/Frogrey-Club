@@ -2,6 +2,5 @@
 /.data
 /.glitch-assets
 /.vscode
-
-/assets/video.mov
-/.vscode
+*.mov
+*.mp4

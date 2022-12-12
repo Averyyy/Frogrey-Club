@@ -139,7 +139,7 @@ function loadGLTF(filepath, x, y, z) {
         roughness: 0.1,
         transmission: 0.7, // Add transparency (a little more than that)
         thickness: 0.5, // Add refraction!
-        color: 0xffffff,
+        color: 0xffff00,
         wireframe: true,
       });
       let model = gltf.scene;
@@ -155,7 +155,6 @@ function loadGLTF(filepath, x, y, z) {
       // mesh.position.set(x, y, z);
       mesh.position.set(x + 20, y, z + 20);
       mesh.layers.enable(1);
-
       bar_small = mesh;
 
       // bar_small.layers.toggle(1);
@@ -208,7 +207,7 @@ function load_frogs() {
       //   mesh.position.set(x, y, z);
       mesh.rotation.set(-PI / 2, 0, 0);
       mesh.scale.set(0.2, 0.2, 0.2);
-
+      // mesh.layers.enable(1);
       let frog = new frogClass(mesh);
       frog_list.push(frog);
       scene.add(mesh);
