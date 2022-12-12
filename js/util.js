@@ -17,6 +17,19 @@ function getPlane(mode) {
       thickness: 0.2, // Add refraction!
       // envMap: hdr
     });
+
+    // use video_plane as texture
+    const video = document.createElement("video");
+    video.src = `/assets/videos/video_plane.mp4`;
+    video.loop = true;
+    video.muted = true;
+    video.play();
+    const videoTexture = new THREE.VideoTexture(video);
+    videoTexture.needsUpdate = true;
+    videoTexture.minFilter = THREE.LinearFilter;
+    videoTexture.magFilter = THREE.LinearFilter;
+    videoTexture.format = THREE.RGBAFormat;
+    material.map = videoTexture;
     const mesh = new THREE.Mesh(geometry, material);
 
     // let posArray = geometry.attributes.position.array;
@@ -141,7 +154,7 @@ function LaserBeam(iconfig) {
     if (intersectArray.length > 0) {
       this.object3d.scale.z = intersectArray[0].distance;
       this.object3d.lookAt(intersectArray[0].point.clone());
-      this.pointLight.visible = false;
+      this.pointLight.visible = ui.LaserPointLight;
 
       //get normal vector
       var normalMatrix = new THREE.Matrix3().getNormalMatrix(

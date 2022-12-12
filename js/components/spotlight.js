@@ -60,7 +60,7 @@ class Light {
 }
 
 function getLight() {
-  const light = new THREE.SpotLight(0x8be2af, 0.4, 0); // color, intensity, distance, angle, penumbra, decay
+  const light = new THREE.SpotLight(0xffffff, 1, 0); // color, intensity, distance, angle, penumbra, decay
   light.castShadow = true; // default false
 
   // shadow properties

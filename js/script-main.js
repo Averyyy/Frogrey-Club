@@ -7,6 +7,7 @@ const C_GRAVITY = 0.2;
 
 let ui = {
   // add yours
+  LaserPointLight: false,
 };
 
 let laserbeamLeft = [];
@@ -84,6 +85,7 @@ function setupTHREE() {
 
   // Character
   user = new Character();
+  // targetBox = user.mesh;
 
   // 3rd person camera
   thirdPovCam = new ThirdPersonCamera(camera, params);
@@ -177,71 +179,72 @@ function setupGUI() {
   // gui
   gui = new dat.gui.GUI();
 
-  let folderMainSound = gui.addFolder("MAIN SOUND");
-  folderMainSound.open();
-  folderMainSound.add(FFT_MAIN_SOUND, "triggered").listen();
-  folderMainSound.add(FFT_MAIN_SOUND, "avg", 0, 1.0).step(0.01).listen();
-  folderMainSound.add(FFT_MAIN_SOUND, "diff", 0, 1.0).step(0.01).listen();
+  gui.add(ui, "LaserPointLight").listen();
+  // let folderMainSound = gui.addFolder("MAIN SOUND");
+  // folderMainSound.open();
+  // folderMainSound.add(FFT_MAIN_SOUND, "triggered").listen();
+  // folderMainSound.add(FFT_MAIN_SOUND, "avg", 0, 1.0).step(0.01).listen();
+  // folderMainSound.add(FFT_MAIN_SOUND, "diff", 0, 1.0).step(0.01).listen();
 
-  let folderMainSoundConfig = gui.addFolder("MAIN SOUND CONFIG");
-  folderMainSoundConfig
-    .add(FFT_MAIN_SOUND, "threshold", 0.0, 1.0)
-    .step(0.01)
-    .listen();
-  folderMainSoundConfig
-    .add(FFT_MAIN_SOUND, "min", 0, 1023)
-    .step(1)
-    .listen()
-    .onChange(() => {
-      FFT_MAIN_SOUND.min =
-        FFT_MAIN_SOUND.min > FFT_MAIN_SOUND.max
-          ? FFT_MAIN_SOUND.max - 1
-          : FFT_MAIN_SOUND.min;
-    });
-  folderMainSoundConfig
-    .add(FFT_MAIN_SOUND, "max", 0, 1023)
-    .step(1)
-    .listen()
-    .onChange(() => {
-      FFT_MAIN_SOUND.max =
-        FFT_MAIN_SOUND.max < FFT_MAIN_SOUND.min
-          ? FFT_MAIN_SOUND.min + 1
-          : FFT_MAIN_SOUND.max;
-    });
+  // let folderMainSoundConfig = gui.addFolder("MAIN SOUND CONFIG");
+  // folderMainSoundConfig
+  //   .add(FFT_MAIN_SOUND, "threshold", 0.0, 1.0)
+  //   .step(0.01)
+  //   .listen();
+  // folderMainSoundConfig
+  //   .add(FFT_MAIN_SOUND, "min", 0, 1023)
+  //   .step(1)
+  //   .listen()
+  //   .onChange(() => {
+  //     FFT_MAIN_SOUND.min =
+  //       FFT_MAIN_SOUND.min > FFT_MAIN_SOUND.max
+  //         ? FFT_MAIN_SOUND.max - 1
+  //         : FFT_MAIN_SOUND.min;
+  //   });
+  // folderMainSoundConfig
+  //   .add(FFT_MAIN_SOUND, "max", 0, 1023)
+  //   .step(1)
+  //   .listen()
+  //   .onChange(() => {
+  //     FFT_MAIN_SOUND.max =
+  //       FFT_MAIN_SOUND.max < FFT_MAIN_SOUND.min
+  //         ? FFT_MAIN_SOUND.min + 1
+  //         : FFT_MAIN_SOUND.max;
+  //   });
 
-  let folderSubSound = gui.addFolder("SUB SOUND");
-  folderSubSound.open();
-  folderSubSound.add(FFT_SUB_SOUND, "triggered").listen();
-  folderSubSound.add(FFT_SUB_SOUND, "avg", 0, 1.0).step(0.01).listen();
-  folderSubSound.add(FFT_SUB_SOUND, "diff", 0, 1.0).step(0.01).listen();
+  // let folderSubSound = gui.addFolder("SUB SOUND");
+  // folderSubSound.open();
+  // folderSubSound.add(FFT_SUB_SOUND, "triggered").listen();
+  // folderSubSound.add(FFT_SUB_SOUND, "avg", 0, 1.0).step(0.01).listen();
+  // folderSubSound.add(FFT_SUB_SOUND, "diff", 0, 1.0).step(0.01).listen();
 
-  let folderSubSoundConfig = gui.addFolder("SUB SOUND CONFIG");
-  folderSubSoundConfig
-    .add(FFT_SUB_SOUND, "threshold", 0.0, 1.0)
-    .step(0.01)
-    .listen()
-    .onChange(() => {});
-  folderSubSoundConfig
-    .add(FFT_SUB_SOUND, "min", 0, 1023)
-    .step(1)
-    .listen()
-    .onChange(() => {
-      FFT_SUB_SOUND.min =
-        FFT_SUB_SOUND.min > FFT_SUB_SOUND.max
-          ? FFT_SUB_SOUND.max - 1
-          : FFT_SUB_SOUND.min;
-    });
-  folderSubSoundConfig
-    .add(FFT_SUB_SOUND, "max", 0, 1023)
-    .step(1)
-    .listen()
-    .onChange(() => {
-      FFT_SUB_SOUND.max =
-        FFT_SUB_SOUND.max < FFT_SUB_SOUND.min
-          ? FFT_SUB_SOUND.min + 1
-          : FFT_SUB_SOUND.max;
-    });
+  // let folderSubSoundConfig = gui.addFolder("SUB SOUND CONFIG");
+  // folderSubSoundConfig
+  //   .add(FFT_SUB_SOUND, "threshold", 0.0, 1.0)
+  //   .step(0.01)
+  //   .listen()
+  //   .onChange(() => {});
+  // folderSubSoundConfig
+  //   .add(FFT_SUB_SOUND, "min", 0, 1023)
+  //   .step(1)
+  //   .listen()
+  //   .onChange(() => {
+  //     FFT_SUB_SOUND.min =
+  //       FFT_SUB_SOUND.min > FFT_SUB_SOUND.max
+  //         ? FFT_SUB_SOUND.max - 1
+  //         : FFT_SUB_SOUND.min;
+  //   });
+  // folderSubSoundConfig
+  //   .add(FFT_SUB_SOUND, "max", 0, 1023)
+  //   .step(1)
+  //   .listen()
+  //   .onChange(() => {
+  //     FFT_SUB_SOUND.max =
+  //       FFT_SUB_SOUND.max < FFT_SUB_SOUND.min
+  //         ? FFT_SUB_SOUND.min + 1
+  //         : FFT_SUB_SOUND.max;
+  //   });
 
-  let folderVisuals = gui.addFolder("VISUALS");
+  // let folderVisuals = gui.addFolder("VISUALS");
   // add yours
 }

@@ -1,10 +1,10 @@
 /* sound variables */
 let P5_VISIBILITY = true;
 let mic, fft;
-let spectrum ;
+let spectrum;
 
 // pos variables
-let pos_array = []
+let pos_array = [];
 let down = 0;
 let nod = 0;
 
@@ -14,7 +14,7 @@ function setup() {
   let canvas = createCanvas(100, 50);
   //canvas.mousePressed(userStartAudio); // ***
   canvas.parent("container-p5");
-  // canvas.hide();
+  canvas.hide();
 
   background(0);
   pixelDensity(1);
@@ -33,7 +33,6 @@ function setup() {
 
 function draw() {
   background(0);
-
 
   //update and display FFT spectrum
   spectrum = fft.analyze();
@@ -103,15 +102,14 @@ function draw() {
   let distance = pose.nose.y - eyesAvgPosY;
 
   if (frameCount % 10 === 0) {
-
-    pos_array.push(distance.toFixed(2))
+    pos_array.push(distance.toFixed(2));
     while (pos_array.length > 3) {
       pos_array.shift();
     }
-    // console.log(pos_array)  
+    // console.log(pos_array)
   }
   // console.log(pos_array)
-  if ((pos_array[0] - pos_array[1]) < -2.5) {
+  if (pos_array[0] - pos_array[1] < -2.5) {
     // console.log("down");
     down = 1;
     nod = 0;
@@ -119,12 +117,11 @@ function draw() {
     if (down === 1) {
       // console.log("nod")
       down = 0;
-      nod = 1
+      nod = 1;
     } else {
       nod = 0;
     }
   }
-
 }
 
 function mousePressed() {
@@ -145,6 +142,3 @@ function keyPressed() {
     }
   }
 }
-
-
-

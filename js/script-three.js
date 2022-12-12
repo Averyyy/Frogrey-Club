@@ -25,19 +25,18 @@ function initTHREE() {
   // // repeat texture
   // bgTexture.wrapS = THREE.RepeatWrapping;
   // scene.background = bgTexture;
-  const videoBg = document.createElement("video");
-  videoBg.src = `/assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
-  videoBg.loop = true;
-  videoBg.muted = true;
-  videoBg.play();
-  videoTexture = new THREE.VideoTexture(videoBg);
-  videoTexture.minFilter = THREE.LinearFilter;
-  videoTexture.magFilter = THREE.LinearFilter;
-  videoTexture.format = THREE.RGBFormat;
+  // const videoBg = document.createElement("video");
+  // videoBg.src = `/assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
+  // videoBg.loop = true;
+  // videoBg.muted = true;
+  // videoBg.play();
+  // videoTexture = new THREE.VideoTexture(videoBg);
+  // videoTexture.minFilter = THREE.LinearFilter;
+  // videoTexture.magFilter = THREE.LinearFilter;
+  // videoTexture.format = THREE.RGBFormat;
   // scene.background = videoTexture;
 
   targetBox = getBox();
-  // targetBox.material.color.set(0xff00ff);
   scene.add(targetBox);
   targetBox.visible = false;
 
@@ -107,14 +106,13 @@ function initTHREE() {
   renderer.gammaOutput = true;
   renderer.toneMappingExposure = Math.pow(0.4, 3.0);
 
-
   // stats
   stats = new Stats();
   stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
   container.appendChild(stats.dom);
 
   //AmbientLight
-  Ambient = new THREE.AmbientLight(0x404040, 0.3);
+  Ambient = new THREE.AmbientLight(0x404040, 0.5);
   scene.add(Ambient);
 
   // //DirectionalLight
