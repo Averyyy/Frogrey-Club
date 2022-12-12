@@ -60,10 +60,12 @@ class Light {
 }
 
 function getLight() {
-  const light = new THREE.SpotLight(0xffffff, 1, 0); // color, intensity, distance, angle, penumbra, decay
+  const light = new THREE.SpotLight(0x8be2af, 0.4, 0); // color, intensity, distance, angle, penumbra, decay
   light.castShadow = true; // default false
 
   // shadow properties
+  light.decay = 4;
+  // light.distance = 60;
   // can't manipulate the mapSize in realtime.
   light.shadow.mapSize.width = 1024; // default
   light.shadow.mapSize.height = 1024; // default

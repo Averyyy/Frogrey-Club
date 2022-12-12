@@ -47,7 +47,7 @@ class Specturm {
       let min = Math.min(...this.pastAmplitude);
       for (let i = 0; i < this.specList.length; i++) {
         let height =
-          this.pastAmplitude[(i + frameCount) % this.pastAmplitude.length] -
+          this.pastAmplitude[Math.floor(i + Math.cos(frameCount)) % this.pastAmplitude.length] -
           min;
         this.specList[i].scale.y = height * WORLD_HALF_SIZE;
       }
@@ -56,8 +56,8 @@ class Specturm {
       for (let i = 0; i < this.specList.length; i++) {
         if (
           this.specList[i].position.z === -WORLD_HALF_SIZE &&
-          this.specList[i].position.x > -WORLD_HALF_SIZE + 50 &&
-          this.specList[i].position.x < WORLD_HALF_SIZE - 50
+          this.specList[i].position.x > -WORLD_HALF_SIZE + 20 &&
+          this.specList[i].position.x < WORLD_HALF_SIZE - 20
         ) {
           this.specList[i].visible = false;
         } else {

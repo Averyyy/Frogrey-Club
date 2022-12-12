@@ -6,7 +6,7 @@ let container, stats, gui, params, controls;
 let scene, camera, renderer;
 let time = 0;
 let frame = 0;
-const renderRatio = 0.5;
+const renderRatio = 0.8;
 
 let lights = [];
 let targetBox;
@@ -24,15 +24,15 @@ function initTHREE() {
   // bgTexture.wrapS = THREE.RepeatWrapping;
   // scene.background = bgTexture;
 
-  // targetBox = getBox();
-  // // targetBox.material.color.set(0xff00ff);
-  // scene.add(targetBox);
-  // targetBox.visible = false;
+  targetBox = getBox();
+  // targetBox.material.color.set(0xff00ff);
+  scene.add(targetBox);
+  targetBox.visible = false;
 
-  // let tLight = new Light();
-  // tLight.setPosition(0, 30, 0);
-  // tLight.light.target = targetBox;
-  // lights.push(tLight);
+  let tLight = new Light();
+  tLight.setPosition(0, 30, 0);
+  tLight.light.target = targetBox;
+  lights.push(tLight);
 
   // camera (fov, ratio, near, far)
   camera = new THREE.PerspectiveCamera(
@@ -48,7 +48,8 @@ function initTHREE() {
   camera.rotation.x = -Math.PI / 2;
 
   // renderer
-  renderer = new THREE.WebGLRenderer({ antialias: true });
+  // renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer = new THREE.WebGLRenderer();
   renderer.setClearColor("#333333");
   renderer.setPixelRatio(window.devicePixelRatio * renderRatio); //set pixel ratio to 1/2
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -119,15 +120,15 @@ function animate() {
 
   updateTHREE();
   // // update the lights
-  // for (let l of lights) {
-  //   //l.move();
-  //   l.update();
-  // }
-  // // update the target position
-  // let frequency = frame * 0.01;
-  // let radialDistance = 20;
-  // targetBox.position.x = cos(frequency) * radialDistance;
-  // targetBox.position.z = sin(frequency) * radialDistance;
+  for (let l of lights) {
+    //l.move();
+    l.update();
+  }
+  // update the target position
+  let frequency = frame * 0.01;
+  let radialDistance = 20;
+  targetBox.position.x = cos(frequency) * radialDistance;
+  targetBox.position.z = sin(frequency) * radialDistance;
 
   renderer.autoClear = false;
   renderer.clear();

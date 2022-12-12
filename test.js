@@ -16,7 +16,7 @@ var mouse = {
     x: 0,
     y: 0
 }
-document.addEventListener('mousemove', function(event) {
+document.addEventListener('mousemove', function (event) {
     mouse.x = (event.clientX / window.innerWidth) - 0.5
     mouse.y = (event.clientY / window.innerHeight) - 0.5
 }, false);
@@ -132,7 +132,7 @@ function LaserBeam(iconfig) {
         }));
 
 
-    this.intersect = function(direction, objectArray = []) {
+    this.intersect = function (direction, objectArray = []) {
 
         raycaster.set(
             this.object3d.position.clone(),
@@ -158,40 +158,40 @@ function LaserBeam(iconfig) {
             this.pointLight.position.z = intersectArray[0].point.z + normalVector.z * 0.5;
 
             //calculation reflect vector
-            var reflectVector = new THREE.Vector3(
-                intersectArray[0].point.x - this.object3d.position.x,
-                intersectArray[0].point.y - this.object3d.position.y,
-                intersectArray[0].point.z - this.object3d.position.z
-            ).normalize().reflect(normalVector);
+            // var reflectVector = new THREE.Vector3(
+            //     intersectArray[0].point.x - this.object3d.position.x,
+            //     intersectArray[0].point.y - this.object3d.position.y,
+            //     intersectArray[0].point.z - this.object3d.position.z
+            // ).normalize().reflect(normalVector);
 
             //set reflectObject
-            if (this.reflectObject != null) {
-                this.reflectObject.object3d.visible = true;
-                this.reflectObject.object3d.position.set(
-                    intersectArray[0].point.x,
-                    intersectArray[0].point.y,
-                    intersectArray[0].point.z
-                );
+            // if (this.reflectObject != null) {
+            //     this.reflectObject.object3d.visible = true;
+            //     this.reflectObject.object3d.position.set(
+            //         intersectArray[0].point.x,
+            //         intersectArray[0].point.y,
+            //         intersectArray[0].point.z
+            //     );
 
-                //iteration reflect
-                this.reflectObject.intersect(reflectVector.clone(), objectArray);
-            }
+            //     //iteration reflect
+            //     this.reflectObject.intersect(reflectVector.clone(), objectArray);
+            // }
         }
         //non collision
-        else {
-            this.object3d.scale.z = config.length;
-            this.pointLight.visible = false;
-            this.object3d.lookAt(
-                this.object3d.position.x + direction.x,
-                this.object3d.position.y + direction.y,
-                this.object3d.position.z + direction.z
-            );
+        // else {
+        //     this.object3d.scale.z = config.length;
+        //     this.pointLight.visible = false;
+        //     this.object3d.lookAt(
+        //         this.object3d.position.x + direction.x,
+        //         this.object3d.position.y + direction.y,
+        //         this.object3d.position.z + direction.z
+        //     );
 
-            this.hiddenReflectObject();
-        }
+        //     // this.hiddenReflectObject();
+        // }
     }
 
-    this.hiddenReflectObject = function() {
+    this.hiddenReflectObject = function () {
         if (this.reflectObject != null) {
             this.reflectObject.object3d.visible = false;
             this.reflectObject.pointLight.visible = false;

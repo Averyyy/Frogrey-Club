@@ -13,8 +13,8 @@ function getPlane(mode) {
       // color: 0xe47200
       metalness: 0.6, // won't work with transmission
       roughness: 0.3,
-      transmission: 0.5, // Add transparency (a little more than that)
-      thickness: 0.5, // Add refraction!
+      // transmission: 0.5, // Add transparency (a little more than that)
+      thickness: 0.2, // Add refraction!
       // envMap: hdr
     });
     const mesh = new THREE.Mesh(geometry, material);
@@ -42,21 +42,30 @@ function getPlane(mode) {
       (9 * screenSize) / 16,
       32
     );
-    const video = document.getElementById("video");
-    const videoTexture = new THREE.Texture(video);
+    // const video = document.getElementById("video");
+    const video = document.createElement('video');
+    video.src = `/assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
+    video.loop = true;
+    video.muted = true;
+    video.play();
+    const videoTexture = new THREE.VideoTexture(video);
     videoTexture.needsUpdate = true;
     videoTexture.minFilter = THREE.LinearFilter;
     videoTexture.magFilter = THREE.LinearFilter;
-    videoTexture.format = THREE.RGBFormat;
-    videoTexture.generateMipmaps = false;
+    videoTexture.format = THREE.RGBAFormat;
+    // videoTexture.generateMipmaps = false;
     const videoMaterial = new THREE.MeshBasicMaterial({
       map: videoTexture,
+      // blending: THREE.AdditiveBlending,
+
     });
     const material = new THREE.MeshPhongMaterial({
       side: THREE.DoubleSide,
+      blending: THREE.AdditiveBlending,
     });
-    const mesh = new THREE.Mesh(geometry, material);
+    const mesh = new THREE.Mesh(geometry, videoMaterial);
     // mesh.receiveShadow = true;
+    mesh.layers.enable(1);
     scene.add(mesh);
     return mesh;
   }
@@ -83,7 +92,8 @@ function LaserBeam(iconfig) {
 
   this.object3d = new THREE.Object3D();
   this.reflectObject = null;
-  this.pointLight = new THREE.PointLight(0xffffff, 2, 100);
+  this.pointLight = new THREE.PointLight(0xffffff, 2, 30, 3);
+  this.pointLight.castShadow = false;
   var raycaster = new THREE.Raycaster();
   var canvas = generateLaserBodyCanvas();
   var texture = new THREE.Texture(canvas);
@@ -132,7 +142,7 @@ function LaserBeam(iconfig) {
     if (intersectArray.length > 0) {
       this.object3d.scale.z = intersectArray[0].distance;
       this.object3d.lookAt(intersectArray[0].point.clone());
-      this.pointLight.visible = true;
+      this.pointLight.visible = false;
 
       //get normal vector
       var normalMatrix = new THREE.Matrix3().getNormalMatrix(
@@ -151,27 +161,27 @@ function LaserBeam(iconfig) {
       this.pointLight.position.z =
         intersectArray[0].point.z + normalVector.z * 0.5;
 
-      //calculation reflect vector
-      var reflectVector = new THREE.Vector3(
-        intersectArray[0].point.x - this.object3d.position.x,
-        intersectArray[0].point.y - this.object3d.position.y,
-        intersectArray[0].point.z - this.object3d.position.z
-      )
-        .normalize()
-        .reflect(normalVector);
+      // //calculation reflect vector
+      // var reflectVector = new THREE.Vector3(
+      //   intersectArray[0].point.x - this.object3d.position.x,
+      //   intersectArray[0].point.y - this.object3d.position.y,
+      //   intersectArray[0].point.z - this.object3d.position.z
+      // )
+      //   .normalize()
+      //   .reflect(normalVector);
 
-      //set reflectObject
-      if (this.reflectObject != null) {
-        this.reflectObject.object3d.visible = true;
-        this.reflectObject.object3d.position.set(
-          intersectArray[0].point.x,
-          intersectArray[0].point.y,
-          intersectArray[0].point.z
-        );
+      // //set reflectObject
+      // if (this.reflectObject != null) {
+      //   this.reflectObject.object3d.visible = true;
+      //   this.reflectObject.object3d.position.set(
+      //     intersectArray[0].point.x,
+      //     intersectArray[0].point.y,
+      //     intersectArray[0].point.z
+      //   );
 
-        //iteration reflect
-        this.reflectObject.intersect(reflectVector.clone(), objectArray);
-      }
+      //   //iteration reflect
+      //   this.reflectObject.intersect(reflectVector.clone(), objectArray);
+      // }
     }
     //non collision
     else {

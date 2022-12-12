@@ -24,6 +24,7 @@ function loadFrog(filepath) {
       frog.scale.z = 0.1;
       // frog.rotation.y = -PI / 2;
       // frog.position.y = FLOOR_POSITION;
+      frog.castShadow = true;
       user.mesh = frog;
       scene.add(frog);
     },
@@ -207,9 +208,11 @@ function load_frogs() {
       //   mesh.position.set(x, y, z);
       mesh.rotation.set(-PI / 2, 0, 0);
       mesh.scale.set(0.2, 0.2, 0.2);
+      mesh.castShadow = true;
       // mesh.layers.enable(1);
       let frog = new frogClass(mesh);
       frog_list.push(frog);
+      // collisionArr.push(frog);
       scene.add(mesh);
     },
 

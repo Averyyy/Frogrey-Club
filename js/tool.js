@@ -3,10 +3,6 @@ const blueColorMap = [0x0000ff, 0x004dff, 0x005aff, 0x0067ff, 0x0074ff]
 function generate_laserBeam_locations(mode) {
     let laserbeam_left = [];
     let laserbeam_right = [];
-    let laserbeam_top = [];
-    let laserbeam_front_left = [];
-    let laserbeam_front_right = [];
-    let laserbeam_front_top = [];
 
     // laserbeam left positions
     if (mode == 'left') {
@@ -52,6 +48,9 @@ function appendLaserToScene(locations, mode) {
         for (let i = 0; i < locations.length; i++) {
             let laserbeam = new LaserBeam({ reflectMax: 5 });
             laserbeam.object3d.position.set(locations[i].x, locations[i].y, locations[i].z);
+            // set rendering precision for laserbeam
+            laserbeam.object3d.layers.set(1);
+
             laserbeamLeft.push(laserbeam);
             add2Scene(laserbeam);
         }
@@ -82,7 +81,7 @@ function updateLaser(mode = 'left', intensity, loudness) {
                 collisionArr
             )
 
-            laserbeamLeft[i].hiddenReflectObject();
+            // laserbeamLeft[i].hiddenReflectObject();
             // laserbeamLeft[i].setColor(0xff0000);
             laserbeamLeft[i].setColor(redColorMap[colorIndex]);
             laserbeamLeft[i].setIntensity(intensity);

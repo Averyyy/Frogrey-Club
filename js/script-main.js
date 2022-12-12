@@ -1,6 +1,6 @@
 const WORLD_HALF_SIZE = 100;
 const FLOOR_POSITION = -20;
-const screenSize = 130;
+const screenSize = 160;
 const lightDensity = 40;
 // const FLOOR_HEIGHT = -10;
 const C_GRAVITY = 0.2;
@@ -218,7 +218,7 @@ function setupGUI() {
     .add(FFT_SUB_SOUND, "threshold", 0.0, 1.0)
     .step(0.01)
     .listen()
-    .onChange(() => {});
+    .onChange(() => { });
   folderSubSoundConfig
     .add(FFT_SUB_SOUND, "min", 0, 1023)
     .step(1)

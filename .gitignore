@@ -1,6 +1,7 @@
-/.DS_Store
+.DS_Store
 /.data
 /.glitch-assets
-/.vscode
+.vscode/
 *.mov
 *.mp4
+videos/*
