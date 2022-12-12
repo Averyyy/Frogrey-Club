@@ -107,6 +107,7 @@ function initTHREE() {
   renderer.gammaOutput = true;
   renderer.toneMappingExposure = Math.pow(0.4, 3.0);
 
+
   // stats
   stats = new Stats();
   stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -149,6 +150,7 @@ function animate() {
   scene.background = null;
   composer.render();
   // scene.background = videoTexture;
+  // scene.layers.set(0);
 
   renderer.clearDepth();
   camera.layers.set(0);

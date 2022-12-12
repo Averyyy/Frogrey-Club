@@ -47,8 +47,9 @@ class Specturm {
       let min = Math.min(...this.pastAmplitude);
       for (let i = 0; i < this.specList.length; i++) {
         let height =
-          this.pastAmplitude[Math.floor(i + Math.cos(frameCount)) % this.pastAmplitude.length] -
-          min;
+          this.pastAmplitude[
+            Math.floor(i + Math.cos(frameCount)) % this.pastAmplitude.length
+          ] - min;
         this.specList[i].scale.y = height * WORLD_HALF_SIZE;
       }
 
@@ -73,13 +74,17 @@ class Specturm {
 function getGlowBox(x, z, mode) {
   let randColor = new THREE.Color(0xffffff);
   randColor.setHex(Math.random() * 0xffffff);
-  let geometry = new THREE.BoxGeometry(SPECWIDTH, 5, 1);
+  // let geometry = new THREE.BoxGeometry(SPECWIDTH, 5, 1);
+  let geometry = new THREE.CapsuleGeometry(SPECWIDTH, 1, 10, 20);
+  // let geometry = createBoxWithRoundedEdges(SPECWIDTH, 5, 1, 0.5, 10);
   let material = new THREE.MeshBasicMaterial({
     color: randColor,
     wireframe: false,
     // blending: THREE.AdditiveBlending,
   });
+  // material.color.set(10, 0, 0)
   let mesh = new THREE.Mesh(geometry, material);
+  console.log(mesh);
   const dimensions = mesh.geometry.parameters;
   const height = dimensions.height;
   mesh.position.x = x;
@@ -91,4 +96,34 @@ function getGlowBox(x, z, mode) {
   mesh.layers.enable(1); // ***
   scene.add(mesh);
   return mesh;
+}
+
+function createBoxWithRoundedEdges(width, height, depth, radius0, smoothness) {
+  let shape = new THREE.Shape();
+  let eps = 0.00001;
+  let radius = radius0 - eps;
+  shape.absarc(eps, eps, eps, -Math.PI / 2, -Math.PI, true);
+  shape.absarc(eps, height - radius * 2, eps, Math.PI, Math.PI / 2, true);
+  shape.absarc(
+    width - radius * 2,
+    height - radius * 2,
+    eps,
+    Math.PI / 2,
+    0,
+    true
+  );
+  shape.absarc(width - radius * 2, eps, eps, 0, -Math.PI / 2, true);
+  let geometry = new THREE.ExtrudeGeometry(shape, {
+    amount: depth - radius0 * 2,
+    bevelEnabled: true,
+    bevelSegments: smoothness * 2,
+    steps: 1,
+    bevelSize: radius,
+    bevelThickness: radius0,
+    curveSegments: smoothness,
+  });
+
+  geometry.center();
+
+  return geometry;
 }

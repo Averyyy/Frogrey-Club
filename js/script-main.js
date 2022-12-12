@@ -50,7 +50,7 @@ const FFT_SUB_SOUND = {
 
 function setupTHREE() {
   setupGUI();
-
+  // getBox();
   // load the model
   loadFrog("assets/frog.obj");
   // for (let i = 0; i < 10; i++) {
@@ -97,6 +97,7 @@ function setupTHREE() {
   appendLaserToScene(generate_laserBeam_locations("left"), "left");
   // laserbeam right positions
   appendLaserToScene(generate_laserBeam_locations("right"), "right");
+  // getBox();
 }
 
 function updateTHREE() {
@@ -128,7 +129,8 @@ function updateTHREE() {
 }
 
 function getBox() {
-  const geometry = new THREE.BoxGeometry(30, 30, 30);
+  // const geometry = new THREE.BoxGeometry(30, 30, 30);
+  const geometry = new THREE.CapsuleGeometry(10, 10, 10, 10);
   const material = new THREE.MeshNormalMaterial({
     color: 0x00ff00,
     wireframe: false,
@@ -218,7 +220,7 @@ function setupGUI() {
     .add(FFT_SUB_SOUND, "threshold", 0.0, 1.0)
     .step(0.01)
     .listen()
-    .onChange(() => { });
+    .onChange(() => {});
   folderSubSoundConfig
     .add(FFT_SUB_SOUND, "min", 0, 1023)
     .step(1)

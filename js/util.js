@@ -43,7 +43,7 @@ function getPlane(mode) {
       32
     );
     // const video = document.getElementById("video");
-    const video = document.createElement('video');
+    const video = document.createElement("video");
     video.src = `/assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
     video.loop = true;
     video.muted = true;
@@ -57,7 +57,6 @@ function getPlane(mode) {
     const videoMaterial = new THREE.MeshBasicMaterial({
       map: videoTexture,
       // blending: THREE.AdditiveBlending,
-
     });
     const material = new THREE.MeshPhongMaterial({
       side: THREE.DoubleSide,
@@ -71,17 +70,17 @@ function getPlane(mode) {
   }
 }
 
-function getBox() {
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
-  const material = new THREE.MeshPhongMaterial({
-    //color: 0xFFFFFF
-  });
-  const mesh = new THREE.Mesh(geometry, material);
-  // mesh.castShadow = true; //default is false
-  // mesh.receiveShadow = true; //default is false
+// function getBox() {
+//   const geometry = new THREE.BoxGeometry(1, 1, 1);
+//   const material = new THREE.MeshPhongMaterial({
+//     //color: 0xFFFFFF
+//   });
+//   const mesh = new THREE.Mesh(geometry, material);
+//   // mesh.castShadow = true; //default is false
+//   // mesh.receiveShadow = true; //default is false
 
-  return mesh;
-}
+//   return mesh;
+// }
 
 function LaserBeam(iconfig) {
   var config = {

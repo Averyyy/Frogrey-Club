@@ -146,6 +146,15 @@ function loadGLTF(filepath, x, y, z) {
         color: 0xffff00,
         // wireframe: true,
       });
+      // const videoBg = document.createElement("video");
+      // videoBg.src = `/assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
+      // videoBg.loop = true;
+      // videoBg.muted = true;
+      // videoBg.play();
+      // const videoBar = new THREE.VideoTexture(videoBg);
+      // videoBar.minFilter = THREE.LinearFilter;
+      // videoBar.magFilter = THREE.LinearFilter;
+      // videoBar.format = THREE.RGBAFormat;
       let model = gltf.scene;
       model.traverse((o) => {
         if (o.isMesh) {
@@ -158,6 +167,7 @@ function loadGLTF(filepath, x, y, z) {
       mesh.scale.set(0.2, 0.2, 0.2);
       // mesh.position.set(x, y, z);
       mesh.position.set(x + 20, y, z + 20);
+
       mesh.layers.enable(1);
       bar_small = mesh;
 
