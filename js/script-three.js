@@ -6,10 +6,12 @@ let container, stats, gui, params, controls;
 let scene, camera, renderer;
 let time = 0;
 let frame = 0;
-const renderRatio = 0.8;
+const renderRatio = 1;
 
 let lights = [];
 let targetBox;
+
+let videoTexture;
 
 function initTHREE() {
   params = {
@@ -23,6 +25,16 @@ function initTHREE() {
   // // repeat texture
   // bgTexture.wrapS = THREE.RepeatWrapping;
   // scene.background = bgTexture;
+  const videoBg = document.createElement("video");
+  videoBg.src = `/assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
+  videoBg.loop = true;
+  videoBg.muted = true;
+  videoBg.play();
+  videoTexture = new THREE.VideoTexture(videoBg);
+  videoTexture.minFilter = THREE.LinearFilter;
+  videoTexture.magFilter = THREE.LinearFilter;
+  videoTexture.format = THREE.RGBFormat;
+  // scene.background = videoTexture;
 
   targetBox = getBox();
   // targetBox.material.color.set(0xff00ff);
@@ -101,7 +113,7 @@ function initTHREE() {
   container.appendChild(stats.dom);
 
   //AmbientLight
-  Ambient = new THREE.AmbientLight(0x404040, 1);
+  Ambient = new THREE.AmbientLight(0x404040, 0.3);
   scene.add(Ambient);
 
   // //DirectionalLight
@@ -134,7 +146,9 @@ function animate() {
   renderer.clear();
 
   camera.layers.set(1);
+  scene.background = null;
   composer.render();
+  // scene.background = videoTexture;
 
   renderer.clearDepth();
   camera.layers.set(0);

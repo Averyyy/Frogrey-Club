@@ -37,15 +37,19 @@ class frogClass {
     this.rotateVel = map(Math.random(), 0, 1, 0.01, 0.02);
 
     this.mesh = mesh;
+    this.group = new THREE.Group();
+    this.group.add(this.mesh);
+    scene.add(this.group);
     this.initialize();
   }
+
   initialize() {
-    this.mesh.position.copy(this.position);
-    this.mesh.quaternion.copy(this.direction);
-    this.mesh.scale.set(0.2, 0.2, 0.2);
+    this.group.position.copy(this.position);
+    this.group.quaternion.copy(this.direction);
+    this.group.scale.set(0.2, 0.2, 0.2);
   }
   applyGravity() {
-    this.velocity.y -= C_GRAVITY;
+    this.velocity.y -= 0.01;
   }
   rotate() {
     let randomRadio = Math.random() * 0.5;
@@ -67,6 +71,9 @@ class frogClass {
     }
     if (this.position.z > WORLD_HALF_SIZE) {
       this.position.z = WORLD_HALF_SIZE;
+    }
+    if (this.position.y < FLOOR_POSITION + 3) {
+      this.position.y = FLOOR_POSITION + 3;
     }
     this.velocity.applyQuaternion(this.direction);
     this.velocity.normalize();
@@ -100,10 +107,10 @@ class frogClass {
   }
   update() {
     this.random_move();
-    this.mesh.position.x = this.position.x;
-    this.mesh.position.y = this.position.y;
-    this.mesh.position.z = this.position.z;
+    this.group.position.x = this.position.x;
+    this.group.position.y = this.position.y;
+    this.group.position.z = this.position.z;
 
-    this.mesh.setRotationFromQuaternion(this.direction);
+    this.group.setRotationFromQuaternion(this.direction);
   }
 }

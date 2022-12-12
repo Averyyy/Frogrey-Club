@@ -563,7 +563,9 @@ class Character {
     //
     this.mesh = getBox();
     this.mesh.scale.set(10, 20, 2);
-    // scene.add(this.mesh);
+    this.group = new THREE.Group();
+    this.group.add(this.mesh);
+    scene.add(this.group);
     //
     this.keys = {
       forward: false,
@@ -578,16 +580,21 @@ class Character {
     document.addEventListener("keydown", (e) => this.onKeyDown(e), false);
     document.addEventListener("keyup", (e) => this.onKeyUp(e), false);
   }
+  setCharactorMesh(mesh) {
+    this.group.remove(this.mesh);
+    this.mesh = mesh;
+    this.group.add(this.mesh);
+  }
   update() {
     this.rotate();
     this.move();
     this.jump();
     //
-    this.mesh.position.x = this.position.x;
-    this.mesh.position.y = this.position.y;
-    this.mesh.position.z = this.position.z;
+    this.group.position.x = this.position.x;
+    this.group.position.y = this.position.y;
+    this.group.position.z = this.position.z;
 
-    this.mesh.setRotationFromQuaternion(this.direction);
+    this.group.setRotationFromQuaternion(this.direction);
     // this.mesh.rotation.x = PI/2
     // this.mesh.rotation.y = PI;
   }

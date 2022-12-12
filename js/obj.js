@@ -22,11 +22,14 @@ function loadFrog(filepath) {
       frog.scale.x = 0.1;
       frog.scale.y = 0.1;
       frog.scale.z = 0.1;
-      // frog.rotation.y = -PI / 2;
+      frog.rotation.y = PI;
+      frog.rotation.x = PI / 2;
       // frog.position.y = FLOOR_POSITION;
       frog.castShadow = true;
-      user.mesh = frog;
-      scene.add(frog);
+
+      // user.mesh = frog;
+      user.setCharactorMesh(frog);
+      // scene.add(frog);
     },
 
     // onProgress callback
@@ -141,7 +144,7 @@ function loadGLTF(filepath, x, y, z) {
         transmission: 0.7, // Add transparency (a little more than that)
         thickness: 0.5, // Add refraction!
         color: 0xffff00,
-        wireframe: true,
+        // wireframe: true,
       });
       let model = gltf.scene;
       model.traverse((o) => {
@@ -204,16 +207,16 @@ function load_frogs() {
       });
 
       let mesh = new THREE.Mesh(geometry, material);
-      console.log("loading frogs");
+      // console.log("loading frogs");
       //   mesh.position.set(x, y, z);
       mesh.rotation.set(-PI / 2, 0, 0);
-      mesh.scale.set(0.2, 0.2, 0.2);
+      mesh.scale.set(0.8, 0.8, 0.8);
       mesh.castShadow = true;
       // mesh.layers.enable(1);
       let frog = new frogClass(mesh);
       frog_list.push(frog);
       // collisionArr.push(frog);
-      scene.add(mesh);
+      // scene.add(mesh);
     },
 
     // onProgress callback
