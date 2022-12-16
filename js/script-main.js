@@ -1,4 +1,4 @@
-const WORLD_HALF_SIZE = 100;
+const WORLD_HALF_SIZE = 120;
 const FLOOR_POSITION = -20;
 const screenSize = 160;
 const lightDensity = 40;

@@ -25,15 +25,16 @@ function initTHREE() {
   // // repeat texture
   // bgTexture.wrapS = THREE.RepeatWrapping;
   // scene.background = bgTexture;
-  // const videoBg = document.createElement("video");
-  // videoBg.src = `/assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
-  // videoBg.loop = true;
-  // videoBg.muted = true;
-  // videoBg.play();
-  // videoTexture = new THREE.VideoTexture(videoBg);
-  // videoTexture.minFilter = THREE.LinearFilter;
-  // videoTexture.magFilter = THREE.LinearFilter;
-  // videoTexture.format = THREE.RGBFormat;
+
+  const videoBg = document.createElement("video");
+  videoBg.src = `/assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
+  videoBg.loop = true;
+  videoBg.muted = true;
+  videoBg.play();
+  videoTexture = new THREE.VideoTexture(videoBg);
+  videoTexture.minFilter = THREE.LinearFilter;
+  videoTexture.magFilter = THREE.LinearFilter;
+  videoTexture.format = THREE.RGBFormat;
   // scene.background = videoTexture;
 
   targetBox = getBox();
@@ -145,10 +146,7 @@ function animate() {
   renderer.clear();
 
   camera.layers.set(1);
-  scene.background = null;
   composer.render();
-  // scene.background = videoTexture;
-  // scene.layers.set(0);
 
   renderer.clearDepth();
   camera.layers.set(0);
