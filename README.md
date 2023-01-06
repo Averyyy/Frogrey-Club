@@ -1,4 +1,4 @@
-# THREE.JS P5.JS + Audio Input (FFT) Example
+# Frogrey-Club
 
 Enjoy :D
 
