@@ -27,7 +27,7 @@ function initTHREE() {
   // scene.background = bgTexture;
 
   const videoBg = document.createElement("video");
-  videoBg.src = `/assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
+  videoBg.src = `./assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
   videoBg.loop = true;
   videoBg.muted = true;
   videoBg.play();
