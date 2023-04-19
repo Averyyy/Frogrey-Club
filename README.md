@@ -24,6 +24,10 @@ Upon entering the virtual space, users can play energetic music and observe how 
 
 To run this project locally, clone the repository and install the necessary dependencies. Then, launch the project using a local web server, such as [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension for Visual Studio Code.
 
+## Video:
+
+[![Watch the video](https://img.youtube.com/vi/ToXtAqVjP7k/maxresdefault.jpg)](https://youtu.be/ToXtAqVjP7k)
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
