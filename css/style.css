@@ -14,7 +14,8 @@ a:any-link {
   text-decoration: none;
 }
 
-canvas, video {
+canvas,
+video {
   height: 300px;
   width: auto;
 }
@@ -36,4 +37,3 @@ canvas, video {
   text-align: center;
   font-size: 32px;
 }
-
