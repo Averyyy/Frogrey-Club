@@ -9,6 +9,12 @@ body {
   background-size: 400% 400%;
   animation: Gradient 10s ease infinite;
 }
+.frog-logo {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  transform: rotate(45deg);
+}
 
 .title-box {
   display: flex;
