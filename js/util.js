@@ -20,7 +20,7 @@ function getPlane(mode) {
 
     // use video_plane as texture
     const video = document.createElement("video");
-    video.src = `/assets/videos/video_plane.mp4`;
+    video.src = `./assets/videos/video_plane.mp4`;
     video.loop = true;
     video.muted = true;
     video.play();
@@ -57,7 +57,7 @@ function getPlane(mode) {
     );
     // const video = document.getElementById("video");
     const video = document.createElement("video");
-    video.src = `/assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
+    video.src = `./assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
     video.loop = true;
     video.muted = true;
     video.play();

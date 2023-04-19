@@ -1,8 +1,8 @@
-( function () {
+(function () {
 
 	/**
  * NVIDIA FXAA by Timothy Lottes
- * https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf
+ * https://developer.download.nvidia.com./assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf
  * - WebGL port by @supereggbert
  * http://www.glge.org/demos/fxaa/
  * Further improved by Daniel Sturk
@@ -14,12 +14,12 @@
 				value: null
 			},
 			'resolution': {
-				value: new THREE.Vector2( 1 / 1024, 1 / 512 )
+				value: new THREE.Vector2(1 / 1024, 1 / 512)
 			}
 		},
 		vertexShader:
-  /* glsl */
-  `
+			/* glsl */
+			`
 
 		varying vec2 vUv;
 
@@ -283,4 +283,4 @@
 
 	THREE.FXAAShader = FXAAShader;
 
-} )();
+})();
