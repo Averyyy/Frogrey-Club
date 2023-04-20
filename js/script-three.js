@@ -6,7 +6,7 @@ let container, stats, gui, params, controls;
 let scene, camera, renderer;
 let time = 0;
 let frame = 0;
-let renderRatio = 0.5;
+let renderRatio = 0.3;
 
 let lights = [];
 let targetBox;
