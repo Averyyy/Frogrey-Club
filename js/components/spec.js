@@ -48,7 +48,7 @@ class Specturm {
       for (let i = 0; i < this.specList.length; i++) {
         let height =
           this.pastAmplitude[
-            Math.floor(i + Math.cos(frameCount)) % this.pastAmplitude.length
+          Math.floor(i + Math.cos(frameCount)) % this.pastAmplitude.length
           ] - min;
         this.specList[i].scale.y = height * WORLD_HALF_SIZE;
       }
@@ -84,7 +84,7 @@ function getGlowBox(x, z, mode) {
   });
   // material.color.set(10, 0, 0)
   let mesh = new THREE.Mesh(geometry, material);
-  console.log(mesh);
+  // console.log(mesh);
   const dimensions = mesh.geometry.parameters;
   const height = dimensions.height;
   mesh.position.x = x;

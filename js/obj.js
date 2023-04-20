@@ -18,7 +18,7 @@ function loadFrog(filepath) {
           // wireframe: true
         });
       }
-      console.log(frog);
+      // console.log(frog);
       frog.scale.x = 0.1;
       frog.scale.y = 0.1;
       frog.scale.z = 0.1;
@@ -64,7 +64,7 @@ function loadBar(filepath) {
           // wireframe: true
         });
       }
-      console.log(bar);
+      // console.log(bar);
       bar.scale.x = 0.2;
       bar.scale.y = 0.2;
       bar.scale.z = 0.2;
@@ -203,7 +203,7 @@ function small_jump(obj, speed) {
 
 function load_frogs() {
   const loader = new THREE.STLLoader();
-  console.log("loading frogs");
+  // console.log("loading frogs");
 
   loader.load(
     "assets/frog.stl",
