@@ -18,9 +18,14 @@ function getPlane(mode) {
       // envMap: hdr
     });
 
+    videoSrc = 'https://drive.google.com/file/d/1TacvkW4rmG0uA1Yyx4j6SfuLmsYxlK0c/view?usp=sharing'
     // use video_plane as texture
     const video = document.createElement("video");
-    video.src = `./assets/videos/video_plane.mp4`;
+    if (true) {
+      video.src = `./assets/videos/video_plane.mp4`;
+    } else {
+      video.src = videoSrc;
+    }
     video.loop = true;
     video.muted = true;
     video.play();

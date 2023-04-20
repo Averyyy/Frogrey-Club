@@ -25,9 +25,20 @@ function initTHREE() {
   // // repeat texture
   // bgTexture.wrapS = THREE.RepeatWrapping;
   // scene.background = bgTexture;
+  let local = true;
+  if (local) {
+    videoSrc = `./assets/videos/video${Math.floor(Math.random() * 3)}.mp4`
+  } else {
+    let videolinks = [
+      'https://drive.google.com/file/d/1-xA9EloN_nbmI6I1y5x4KgCUHv4E7esj/view?usp=sharing',
+      'https://drive.google.com/file/d/108PY6dlYrhMwJcAaXN--cOvGV6faWhxF/view?usp=sharing',
+      'https://drive.google.com/file/d/1SmSZVwOlh5qvsO3Uq3B8MZ-w2ZoqLqk4/view?usp=sharing',
+    ]
+    videoSrc = videolinks[Math.floor(Math.random() * 3)]
+  }
 
   const videoBg = document.createElement("video");
-  videoBg.src = `./assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
+  videoBg.src = videoSrc;
   videoBg.loop = true;
   videoBg.muted = true;
   videoBg.play();
