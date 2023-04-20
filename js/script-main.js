@@ -8,6 +8,7 @@ const C_GRAVITY = 0.2;
 let ui = {
   // add yours
   LaserPointLight: false,
+  renderRatio: 1,
 };
 
 let laserbeamLeft = [];
@@ -180,6 +181,16 @@ function setupGUI() {
   gui = new dat.gui.GUI();
 
   gui.add(ui, "LaserPointLight").listen();
+  const renderRatioController = gui.add(ui, "renderRatio", 0.1, 1).step(0.1);
+
+  renderRatioController.onChange((newValue) => {
+    // Update the renderRatio variable
+    renderRatio = newValue;
+
+    // Update the renderer's pixel ratio
+    renderer.setPixelRatio(window.devicePixelRatio * renderRatio);
+  });
+
   // let folderMainSound = gui.addFolder("MAIN SOUND");
   // folderMainSound.open();
   // folderMainSound.add(FFT_MAIN_SOUND, "triggered").listen();

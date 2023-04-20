@@ -6,7 +6,7 @@ let container, stats, gui, params, controls;
 let scene, camera, renderer;
 let time = 0;
 let frame = 0;
-let renderRatio = 0.3;
+// let renderRatio = 0.3;
 
 let lights = [];
 let targetBox;
@@ -81,7 +81,7 @@ function initTHREE() {
   // renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer = new THREE.WebGLRenderer();
   renderer.setClearColor("#333333");
-  renderer.setPixelRatio(window.devicePixelRatio * renderRatio); //set pixel ratio to 1/2
+  renderer.setPixelRatio(window.devicePixelRatio * ui.renderRatio); //set pixel ratio to 1/2
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   // container
