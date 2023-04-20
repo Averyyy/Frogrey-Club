@@ -6,7 +6,7 @@ let container, stats, gui, params, controls;
 let scene, camera, renderer;
 let time = 0;
 let frame = 0;
-const renderRatio = 1;
+let renderRatio = 1;
 
 let lights = [];
 let targetBox;
@@ -15,6 +15,12 @@ let targetBox;
 let local = false;
 
 let videoTexture;
+
+
+let elapsedTime = 0;
+let frameCount = 0;
+
+const clock = new THREE.Clock();
 
 function initTHREE() {
   params = {
@@ -44,6 +50,10 @@ function initTHREE() {
   // videoTexture.magFilter = THREE.LinearFilter;
   // videoTexture.format = THREE.RGBAeeeFormat;
   // scene.background = videoTexture;
+
+
+
+
 
   targetBox = getBox();
   scene.add(targetBox);
@@ -137,6 +147,28 @@ function animate() {
   stats.update();
   time = performance.now();
   frame++;
+
+  // Update elapsedTime and frameCount
+  elapsedTime += clock.getDelta();
+  frameCount++;
+
+  // Calculate and display frame rate every second
+  if (elapsedTime >= 1) {
+    const frameRate = frameCount / elapsedTime;
+    // console.log("Frame rate:", frameRate);
+    elapsedTime = 0;
+    frameCount = 0;
+    if (frameRate < 60) {
+      renderRatio = 0.75;
+      renderer.setPixelRatio(window.devicePixelRatio * renderRatio);
+    } else if (frameRate < 30) {
+      renderRatio = 0.5;
+      renderer.setPixelRatio(window.devicePixelRatio * renderRatio);
+    } else {
+      renderRatio = 1;
+      renderer.setPixelRatio(window.devicePixelRatio * renderRatio);
+    }
+  }
 
   updateTHREE();
   // // update the lights
