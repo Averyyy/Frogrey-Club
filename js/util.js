@@ -28,6 +28,7 @@ function getPlane(mode) {
     }
     video.loop = true;
     video.muted = true;
+    videoBg.crossOrigin = "anonymous";
     video.play();
     const videoTexture = new THREE.VideoTexture(video);
     videoTexture.needsUpdate = true;
@@ -65,7 +66,7 @@ function getPlane(mode) {
     if (local) {
       video.src = `./assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
     } else {
-      video.src = `https://averyyy.github.io/Frogrey-Club/assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
+      video.src = `https://media.githubusercontent.com/media/Averyyy/Frogrey-Club/master/assets/videos/video1.mp4`;
     }
     video.loop = true;
     video.muted = true;
@@ -75,6 +76,7 @@ function getPlane(mode) {
     videoTexture.minFilter = THREE.LinearFilter;
     videoTexture.magFilter = THREE.LinearFilter;
     videoTexture.format = THREE.RGBAFormat;
+    videoBg.crossOrigin = "anonymous";
     // videoTexture.generateMipmaps = false;
     const videoMaterial = new THREE.MeshBasicMaterial({
       map: videoTexture,
