@@ -11,6 +11,7 @@ const renderRatio = 1;
 let lights = [];
 let targetBox;
 
+// this variable for github deployment, if true, it will load local video
 let local = false;
 
 let videoTexture;
