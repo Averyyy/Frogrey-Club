@@ -18,7 +18,7 @@ function getPlane(mode) {
       // envMap: hdr
     });
 
-    let planeSrc = 'https://github.com/Averyyy/Frogrey-Club/blob/master/assets/videos/video_plane.mp4?raw=true'
+    let planeSrc = 'https://media.githubusercontent.com/media/Averyyy/Frogrey-Club/master/assets/videos/video_plane.mp4'
     // use video_plane as texture
     const video = document.createElement("video");
     if (local) {
