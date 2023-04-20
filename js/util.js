@@ -26,9 +26,9 @@ function getPlane(mode) {
     } else {
       video.src = planeSrc;
     }
+    video.crossOrigin = "anonymous";
     video.loop = true;
     video.muted = true;
-    video.crossOrigin = "anonymous";
     video.play();
     const videoTexture = new THREE.VideoTexture(video);
     videoTexture.needsUpdate = true;
