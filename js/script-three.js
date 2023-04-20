@@ -11,7 +11,7 @@ const renderRatio = 1;
 let lights = [];
 let targetBox;
 
-let local = true;
+let local = false;
 
 let videoTexture;
 

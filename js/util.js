@@ -28,7 +28,7 @@ function getPlane(mode) {
     }
     video.loop = true;
     video.muted = true;
-    videoBg.crossOrigin = "anonymous";
+    video.crossOrigin = "anonymous";
     video.play();
     const videoTexture = new THREE.VideoTexture(video);
     videoTexture.needsUpdate = true;
@@ -70,13 +70,14 @@ function getPlane(mode) {
     }
     video.loop = true;
     video.muted = true;
+    video.crossOrigin = "anonymous";
     video.play();
     const videoTexture = new THREE.VideoTexture(video);
     videoTexture.needsUpdate = true;
     videoTexture.minFilter = THREE.LinearFilter;
     videoTexture.magFilter = THREE.LinearFilter;
     videoTexture.format = THREE.RGBAFormat;
-    videoBg.crossOrigin = "anonymous";
+
     // videoTexture.generateMipmaps = false;
     const videoMaterial = new THREE.MeshBasicMaterial({
       map: videoTexture,
