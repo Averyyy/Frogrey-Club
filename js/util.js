@@ -18,13 +18,13 @@ function getPlane(mode) {
       // envMap: hdr
     });
 
-    videoSrc = 'https://drive.google.com/file/d/1TacvkW4rmG0uA1Yyx4j6SfuLmsYxlK0c/view?usp=sharing'
+    let planeSrc = 'https://github.com/Averyyy/Frogrey-Club/blob/master/assets/videos/video_plane.mp4?raw=true'
     // use video_plane as texture
     const video = document.createElement("video");
-    if (true) {
+    if (local) {
       video.src = `./assets/videos/video_plane.mp4`;
     } else {
-      video.src = videoSrc;
+      video.src = planeSrc;
     }
     video.loop = true;
     video.muted = true;
@@ -62,7 +62,11 @@ function getPlane(mode) {
     );
     // const video = document.getElementById("video");
     const video = document.createElement("video");
-    video.src = `./assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
+    if (local) {
+      video.src = `./assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
+    } else {
+      video.src = `https://averyyy.github.io/Frogrey-Club/assets/videos/video${Math.floor(Math.random() * 3)}.mp4`;
+    }
     video.loop = true;
     video.muted = true;
     video.play();

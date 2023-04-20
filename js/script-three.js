@@ -11,6 +11,8 @@ const renderRatio = 1;
 let lights = [];
 let targetBox;
 
+let local = false;
+
 let videoTexture;
 
 function initTHREE() {
@@ -25,27 +27,21 @@ function initTHREE() {
   // // repeat texture
   // bgTexture.wrapS = THREE.RepeatWrapping;
   // scene.background = bgTexture;
-  let local = true;
-  if (local) {
-    videoSrc = `./assets/videos/video${Math.floor(Math.random() * 3)}.mp4`
-  } else {
-    let videolinks = [
-      'https://drive.google.com/file/d/1-xA9EloN_nbmI6I1y5x4KgCUHv4E7esj/view?usp=sharing',
-      'https://drive.google.com/file/d/108PY6dlYrhMwJcAaXN--cOvGV6faWhxF/view?usp=sharing',
-      'https://drive.google.com/file/d/1SmSZVwOlh5qvsO3Uq3B8MZ-w2ZoqLqk4/view?usp=sharing',
-    ]
-    videoSrc = videolinks[Math.floor(Math.random() * 3)]
-  }
 
-  const videoBg = document.createElement("video");
-  videoBg.src = videoSrc;
-  videoBg.loop = true;
-  videoBg.muted = true;
-  videoBg.play();
-  videoTexture = new THREE.VideoTexture(videoBg);
-  videoTexture.minFilter = THREE.LinearFilter;
-  videoTexture.magFilter = THREE.LinearFilter;
-  videoTexture.format = THREE.RGBFormat;
+
+  // let videoSrc = `./assets/videos/video_plane.mp4`;
+  // if (!local) videoSrc = `https://github.com/Averyyy/Frogrey-Club/blob/master/assets/videos/video1.mp4?raw=true`
+
+  // const videoBg = document.createElement("video");
+  // // console.log(videoSrc);
+  // videoBg.src = videoSrc;
+  // videoBg.loop = true;
+  // videoBg.muted = true;
+  // videoBg.play();
+  // videoTexture = new THREE.VideoTexture(videoBg);
+  // videoTexture.minFilter = THREE.LinearFilter;
+  // videoTexture.magFilter = THREE.LinearFilter;
+  // videoTexture.format = THREE.RGBAeeeFormat;
   // scene.background = videoTexture;
 
   targetBox = getBox();
