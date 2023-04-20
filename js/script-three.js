@@ -159,13 +159,7 @@ function animate() {
     elapsedTime = 0;
     frameCount = 0;
     if (frameRate < 60) {
-      renderRatio = 0.75;
-      renderer.setPixelRatio(window.devicePixelRatio * renderRatio);
-    } else if (frameRate < 30) {
       renderRatio = 0.5;
-      renderer.setPixelRatio(window.devicePixelRatio * renderRatio);
-    } else {
-      renderRatio = 1;
       renderer.setPixelRatio(window.devicePixelRatio * renderRatio);
     }
   }
