@@ -59,3 +59,19 @@ body {
   transform: scale(1.1);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
+.instructions-card {
+  transform: translateY(50px);
+  opacity: 0;
+  animation: slide-up 1s ease-out forwards;
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
